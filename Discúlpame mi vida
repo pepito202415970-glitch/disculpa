@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Me disculpas, nena?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff0f5;
+            padding-top: 100px;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #d6336c;
+        }
+
+        .botones {
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        #si {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #no {
+            background-color: #dc3545;
+            color: white;
+            position: absolute;
+        }
+
+        #mensaje {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #6f42c1;
+        }
+
+        /* El corazón grande */
+        #corazonGrande {
+            display: none;
+            font-size: 150px;
+            color: red;
+            margin-top: 30px;
+            animation: latir 1s infinite;
+        }
+
+        @keyframes latir {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        .corazon {
+            position: fixed;
+            top: -50px;
+            color: red;
+            font-size: 24px;
+            animation: caer 5s linear forwards;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes caer {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Me disculpas, nena?</h1>
+
+    <div class="botones">
+        <button id="si">Sí</button>
+        <button id="no">No</button>
+    </div>
+
+    <div id="mensaje"></div>
+    <!-- Aquí en lugar de la imagen pondremos un corazón grande -->
+    <div id="corazonGrande">❤️</div>
+
+    <script>
+        const btnSi = document.getElementById("si");
+        const btnNo = document.getElementById("no");
+        const mensaje = document.getElementById("mensaje");
+        const corazonGrande = document.getElementById("corazonGrande");
+
+        let noBtnSize = 1;
+
+        btnSi.addEventListener("click", () => {
+            mensaje.textContent = "Te amo mi amor, gracias por disculparme 💖";
+            corazonGrande.style.display = "block";
+            btnSi.style.display = "none";
+            btnNo.style.display = "none";
+
+            lanzarCorazones();
+        });
+
+        btnNo.addEventListener("mouseover", () => {
+            noBtnSize -= 0.1;
+            if (noBtnSize <= 0.2) {
+                btnNo.style.display = "none";
+            } else {
+                btnNo.style.transform = `scale(${noBtnSize})`;
+                // Mueve el botón a una posición aleatoria
+                const randomX = Math.random() * (window.innerWidth - btnNo.offsetWidth);
+                const randomY = Math.random() * (window.innerHeight - btnNo.offsetHeight);
+                btnNo.style.left = randomX + "px";
+                btnNo.style.top = randomY + "px";
+            }
+        });
+
+        function lanzarCorazones() {
+            setInterval(() => {
+                const corazon = document.createElement("div");
+                corazon.classList.add("corazon");
+                corazon.innerText = "💖";
+                corazon.style.left = Math.random() * 100 + "vw";
+                corazon.style.fontSize = (Math.random() * 20 + 20) + "px";
+                document.body.appendChild(corazon);
+
+                setTimeout(() => {
+                    corazon.remove();
+                }, 5000);
+            }, 200);
+        }
+    </script>
+</body>
+</html>
