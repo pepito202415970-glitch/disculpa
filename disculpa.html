@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>¿Me disculpas, nena?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #fff0f5;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 2em;
+            color: #d6336c;
+        }
+
+        .botones {
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        #si {
+            background-color: #28a745;
+            color: white;
+        }
+
+        #no {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        #mensaje {
+            margin-top: 30px;
+            font-size: 1.5em;
+            color: #6f42c1;
+        }
+
+        #imagen {
+            margin-top: 20px;
+            display: none;
+        }
+
+        #imagen img {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1>¿Me disculpas, nena?</h1>
+
+    <div class="botones">
+        <button id="si">Sí</button>
+        <button id="no">No</button>
+    </div>
+
+    <div id="mensaje"></div>
+    <div id="imagen">
+        <img src="oso.png" alt="Ositos abrazándose">
+    </div>
+
+    <script>
+        const btnSi = document.getElementById("si");
+        const btnNo = document.getElementById("no");
+        const mensaje = document.getElementById("mensaje");
+        const imagen = document.getElementById("imagen");
+
+        let noBtnSize = 1;
+
+        btnSi.addEventListener("click", () => {
+            mensaje.textContent = "Te amo mi amor, gracias por disculparme 💖";
+            imagen.style.display = "block";
+            btnSi.style.display = "none";
+            btnNo.style.display = "none";
+        });
+
+        btnNo.addEventListener("click", () => {
+            noBtnSize -= 0.1;
+            if (noBtnSize <= 0) {
+                btnNo.style.display = "none";
+            } else {
+                btnNo.style.transform = `scale(${noBtnSize})`;
+            }
+        });
+    </script>
+</body>
+</html>
