@@ -9,6 +9,7 @@
             text-align: center;
             background-color: #fff0f5;
             padding-top: 100px;
+            overflow: hidden;
         }
 
         h1 {
@@ -54,6 +55,27 @@
         #imagen img {
             width: 200px;
         }
+
+        .corazon {
+            position: fixed;
+            top: -50px;
+            color: red;
+            font-size: 24px;
+            animation: caer 5s linear infinite;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        @keyframes caer {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
@@ -66,7 +88,7 @@
 
     <div id="mensaje"></div>
     <div id="imagen">
-        <img src="oso.png" alt="Ositos abrazándose">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAAAjVBMVEX///8AAAD19fX09PT8/PyCgoKUlJTDw8NwcHBuYmK+vr7FxcXf399vb2+srKzq6uqnp6e2trZiYmImJiYqKiqkpKTa2tqcnJx7e3vw8PDNzc2MjIykpKScnJx4eHiWlpZNTU1GRkaGhoZ2dnaDg4NJSUlmZmaYmJilpaWNjY2VlZUNFQjFAAAFiUlEQVR4nO2diXaiMBBGEyKgpAmlILzK7e7/f79TLUCF9jZqgHy6nt/y4NZQSlFsJDQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHjW9W9GHnsc+Nn/UqT6Og/LuzLEB0ci93nr9HG0bb3D1PKbX+32koIXV0KvxkNGyo/hQxPyRoVpv5nT8/Y1PeWYpafAjLEmMJzFRg9p+b4YX3HtLGEy4qfz3yGUdGrBlXNTRK5P38N0MR1nVD2g4vu0KqSnnO/xSl9vPqL1Tr+auavQ5TL7soC1TbSijPYwQ+7A33WktmcBLRv1G08j2xGg8ZqG6uRAfMv7Khhpyn1MJ2b++pdlf1yJkbg1n1LDW7xN1UdWh7sHgNGjPpa5vphU3C3aBhxzeK27bVRULUbMqtv+UujSc1xTv+8yI//ZosO+bKkUceOKi6Ni+0d3aVaX0G5T+wPeSu1yC3aOQ1qV1zMxG26zv6DGMcZxFE91tqFbMxZVhnXzUK3VJYW8vSzF2plbP8E2PYmK1bK9GjND7Rf3yXkscaJNZDL+/EzYX+VySz43sJh5J3GPRNz+7PRmt3H7r7QzZslM1dP4aFS8jM29pwbGl77RZo2Xt1OKiODXKMkku6WliZv+onOlcvm+/Lxq7q8RSykZ6DSlKqIzK1mc0Ule0rYrdp7QybZ3cVnI/fK0I7u32jS3eb7VEXDmfVql7PjUt+svKm9an4xd1TzZoeV/UuT9i9uZXzbv5X+eODt3vl7e7ftlvmY2Fh3fL17u8c9yuMHnSltp6vU3aWxI7vXXu+F3+9F7p/+NVs/0O/n+8jZrEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8If/AcyMOfpO5D7pAAAAAElFTkSuQmCC" alt="Ositos abrazándose">
     </div>
 
     <script>
@@ -82,6 +104,8 @@
             imagen.style.display = "block";
             btnSi.style.display = "none";
             btnNo.style.display = "none";
+
+            lanzarCorazones();
         });
 
         btnNo.addEventListener("click", () => {
@@ -92,6 +116,22 @@
                 btnNo.style.transform = `scale(${noBtnSize})`;
             }
         });
+
+        function lanzarCorazones() {
+            setInterval(() => {
+                const corazon = document.createElement("div");
+                corazon.classList.add("corazon");
+                corazon.innerText = "💖";
+                corazon.style.left = Math.random() * 100 + "vw";
+                corazon.style.fontSize = (Math.random() * 20 + 20) + "px";
+                document.body.appendChild(corazon);
+
+                setTimeout(() => {
+                    corazon.remove();
+                }, 5000);
+            }, 200);
+        }
     </script>
 </body>
 </html>
+
